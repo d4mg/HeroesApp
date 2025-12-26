@@ -5,7 +5,8 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const getHeroesByPageAction = async(
     page: number,
-    limit: number = 6
+    limit: number = 6,
+    category: string = 'all',
 ): Promise<HeroesResponse> => {
 // Validamos en la accion para no enviar un NaN not at number
 if( isNaN(page)){
@@ -18,7 +19,8 @@ if (isNaN(limit)){
     const {data} = await heroApi.get<HeroesResponse>(`/`,{
         params: {
             limit: limit,
-            offset: (page - 1) * limit
+            offset: (page - 1) * limit,
+            category: category,
         }
     })
 
